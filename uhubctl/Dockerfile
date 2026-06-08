@@ -1,5 +1,5 @@
-# ARG BUILD_FROM
-# FROM ${BUILD_FROM}
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:20.1.1
+FROM ${BUILD_FROM}
 
 RUN \
     set -x \
@@ -8,8 +8,8 @@ RUN \
         linux-headers \
 	libusb-dev \
 	git \
-	python3 &&\
-    python3 -m ensurepip
+	python3 \
+	py3-pip
 
 RUN git clone https://github.com/mvp/uhubctl.git /tmp/uhubctl && \
     cd /tmp/uhubctl && make && make install
