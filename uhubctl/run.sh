@@ -8,6 +8,14 @@ if bashio::config.has_value 'LOG_LEVEL'; then
 fi
 bashio::log.blue "Log level is set to ${LOG_LEVEL}"
 
+# Best-effort udev rules reload for environments where udev is available.
+if command -v udevadm >/dev/null 2>&1; then
+    bashio::log.blue "Reloading udev rules..."
+    udevadm control --reload-rules || true
+    udevadm trigger --subsystem-match=usb || true
+    bashio::log.blue "Udev rules reloaded."
+fi
+
 while true
 do
     bashio::log.blue "Starting MQTT - uhubctl bridge..."
