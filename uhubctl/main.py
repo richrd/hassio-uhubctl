@@ -166,7 +166,7 @@ class UHUBCTL:
     def fetch_allinfo(self):
         try:
             logger.debug("Fetch current status for all smart hubs")
-            ret = run_in_shell("uhubctl")
+            ret = run_in_shell("sudo uhubctl")
             stdout = ret.stdout
 
             return self._parser(stdout)
@@ -193,7 +193,7 @@ class UHUBCTL:
 
         try:
             ret = run_in_shell(
-                "uhubctl -l {location} -p {port} -a {action} -r 100".format(
+                "sudo uhubctl -l {location} -p {port} -a {action} -r 100".format(
                     location=port.hub_location, port=port.number, action=action
                 )
             )
